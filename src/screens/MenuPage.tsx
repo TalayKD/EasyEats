@@ -54,7 +54,12 @@ const MenuPage = () => {
             height: 70,
             backgroundColor: '#fff',
             borderRadius: 100,
-            zIndex: 2
+            zIndex: 2,
+            shadowColor: 'rgba(0,0,0, .4)',
+            shadowOffset: { height: 2, width: 2 },
+            shadowOpacity: 0.8,
+            shadowRadius: 1.2,
+            elevation: 2,
           }}
           onPress={() =>
             navigation.navigate('Screens', {
@@ -101,6 +106,7 @@ const MenuPage = () => {
             const isSelected = category?.id === selected?.id;
             return (
               <Button
+                shadow = {false}
                 radius={sizes.m}
                 marginHorizontal={sizes.s}
                 key={`category-${category?.id}}`}

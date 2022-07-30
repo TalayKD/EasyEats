@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { timezone } from 'expo-localization';
+import axios from 'axios';
 import {
   IBlock,
   IArticleOptions,
@@ -13,6 +14,10 @@ import {
   IUser,
   IMenu,
 } from './types';
+// import { useEffect, useState } from 'react';
+import restaurantApi from './restaurantAPI';
+const { rest } = restaurantApi();
+console.log('rest', rest)
 
 // users
 export const USERS: IUser[] = [
@@ -108,37 +113,100 @@ export const BRANCHES: IBranch[] = [
   }
 ]
 
-// main restaurants cards
-export const MAIN_RESTAURANTS: IRestaurant[] = [
-  {
-    id: 1,
-    type: 'horizontal',
-    title: 'Hachiban Ramen',
-    image:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
-  },
-  {
-    id: 2,
-    type: 'horizontal',
-    title: 'Yoshinoya',
-    image:
-      'https://upload.wikimedia.org/wikipedia/id/3/3d/Yoshinoya_logo.jpg',
-  },
-  {
-    id: 3,
-    type: 'horizontal',
-    title: 'Pepper Lunch',
-    image:
-      'https://www.centralparkjakarta.com/wp-content/uploads/2017/10/pepper-lunc.jpg',
-  },
-  {
-    id: 4,
-    type: 'horizontal',
-    title: 'Santa Fé Steak',
-    image:
-      'https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
-  }
-];
+// // const [data, setData] = useState([]);
+
+// // const getMovies = async () => {
+// //   try {
+// //    const response = await fetch('http://localhost:5000/rest');
+// //    const json = await response.json();
+// //    setData(json);
+// //    console.log('data', data);
+// //  } catch (error) {
+// //    console.error(error);
+// //  }
+// // }
+// // useEffect(() => {
+// //   getMovies();
+// // }, []);
+
+// // const getRestaurantsFromApi = () => {
+// //   return fetch('http://localhost:5000/rest')
+// //     .then((response) => {return response.json()})
+// //     .catch((error) => {
+// //       console.error(error);
+// //     });
+// // };
+
+// // const fetchData =   return fetch("http://localhost:5000/rest").then((response) => {return response.json()});
+
+// // export function printAddress() {
+// //   return fetchData.then((a) => {
+// //     console.log('a', temp);
+// //     return temp;
+// //   });
+// // };
+// // main restaurants cards
+
+// // const Test = () => {
+// //   const [rest, setRest] = useState<IRestaurant[]>([]);
+// //   useEffect(()=> {
+// //     axios.get("http://localhost:5000/rest").then(res => {setRest(res.data)});
+// //   });
+// //   console.log("Hi", rest);
+// //    return rest;
+// //   // main restaurants cards
+// // }
+// // const MAIN_RESTAURANTS = Test();
+// // console.log("hello", MAIN_RESTAURANTS);
+
+// const getMAIN_RESTAURANTS = () => {
+  // const [rests, setRests] = useState([])
+  // const fetchData = () => {
+  //     fetch("https://localhost:5000/rest")
+  //     .then(response => {
+  //       console.log('hi',response);
+  //       return response.json()
+  //     })
+      // .then(data => {
+      //   setRests(data)
+      //   console.log('hi', rests)
+      // })
+  // }
+  // fetchData();
+  // return rests;
+// }
+
+export const MAIN_RESTAURANTS: IRestaurant[] = rest;
+// [
+//   {
+//     id: 1,
+//     type: 'horizontal',
+//     title: 'Hachiban Ramen',
+//     image:
+//       'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
+//   },
+//   {
+//     id: 2,
+//     type: 'horizontal',
+//     title: 'Yoshinoya',
+//     image:
+//       'https://upload.wikimedia.org/wikipedia/id/3/3d/Yoshinoya_logo.jpg',
+//   },
+//   {
+//     id: 3,
+//     type: 'horizontal',
+//     title: 'Pepper Lunch',
+//     image:
+//       'https://www.centralparkjakarta.com/wp-content/uploads/2017/10/pepper-lunc.jpg',
+//   },
+//   {
+//     id: 4,
+//     type: 'horizontal',
+//     title: 'Santa Fé Steak',
+//     image:
+//       'https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
+//   }
+// ];
 
 // categories
 export const CATEGORIES: ICategory[] = [
@@ -148,7 +216,7 @@ export const CATEGORIES: ICategory[] = [
   {id: 4, name: 'Drinks'},
 ];
 
-// main restaurants cards
+// // main restaurants cards
 export const MENUS: IMenu[] = [
   {
     id: 1,

@@ -53,8 +53,6 @@ export interface IRestaurant {
   title: string;
   description?: string;
   image?: string;
-  timestamp?: number;
-  linkLabel?: string;
   type: 'vertical' | 'horizontal';
 }
 export interface IMenu {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useData, useTheme, useTranslation} from '../hooks/';
 import {Block, Image, Product} from '../components/';
@@ -44,6 +44,11 @@ const Home = () => {
             backgroundColor: '#fff',
             borderRadius: 100,
             zIndex: 2,
+            shadowColor: 'rgba(0,0,0, .4)',
+            shadowOffset: { height: 2, width: 2 },
+            shadowOpacity: 0.8,
+            shadowRadius: 1.2,
+            elevation: 2,
           }}
           onPress={() =>
             navigation.navigate('Screens', {
