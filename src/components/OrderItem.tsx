@@ -4,36 +4,42 @@ import {TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 
 import Text from './Text';
 import Block from './Block';
-import {useTheme, useTranslation} from '../hooks/';
+import {useTheme, useTranslation} from '../hooks';
 import {IBlock} from '../constants/types';
 import Button from './Button';
 import { useNavigation } from '@react-navigation/native';
 
-const Article = ({
-  foodTitle,
-  onPress,
-  linkLabel,
-  foodQuantity,
-  price,
-}: IBlock) => {
+// import React from 'react';
+
+// const OrderItem = (props: any) => {
+//   const { branch_id, menuitem_id, quantity, customizabletext } = props;
+//   let delivered = false;
+// }
+// export default OrderItem
+// {
+//   foodTitle,
+//   onPress,
+//   linkLabel,
+//   foodQuantity,
+//   price,
+// }: IBlock
+
+const OrderItem = (props:any) => {
+  const { foodTitle, price, branch_id, menuitem_id, quantity, customizabletext, basket } = props;
+  console.log('foodTitle', foodTitle)
   const {t} = useTranslation();
   const {colors, gradients, icons, sizes} = useTheme();
   const navigation = useNavigation();
 
     return (
-      <TouchableWithoutFeedback onPress={onPress}>
+      <TouchableWithoutFeedback>
         <Block card marginTop={sizes.sm} style={{flexDirection:'row'}}>
             <View style={{flex: 1, justifyContent:'center'}}>
-              <Button
-                onPress = {() => 
-                  navigation.navigate('Screens', {
-                    screen: 'Customizable'
-                })}
-                color={'#FC585D'} height={30} width={30}>
+              <View style={{backgroundColor: '#FC585D', height: 45, width: 45, borderRadius: 5, alignItems: 'center', justifyContent:'center'}}>
                 <Text white bold>
-                  x{foodQuantity}
+                  x{quantity}
                 </Text>
-              </Button>
+              </View>
             </View>
             <View style={{paddingVertical: 10, flex: 5, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
             <View style={{flex: 3, flexDirection:'row', justifyContent:'space-between', alignItems:'center', paddingHorizontal:10}}>
@@ -45,7 +51,8 @@ const Article = ({
                 </Text>
               )}
 
-            {/* food price */}
+            {/* food price */
+            console.log('price', price)}
             {price && (
             <Text>
               ฿{price.toString()}
@@ -56,9 +63,9 @@ const Article = ({
           <TouchableOpacity style={{ alignSelf:'flex-start', paddingHorizontal:10}}
           onPress = {() => 
             navigation.navigate('Screens', {
-              screen: 'Customizable'
-            })
-          }>
+            screen: 'Customizable',
+            params: { update: true, oldCustomizableText: customizabletext, oldQuantity: quantity, menuitem_id: menuitem_id, basket: basket }
+          })}>
             {/* This is the text */}
             <Text
               p
@@ -68,7 +75,7 @@ const Article = ({
               style={{alignSelf: 'flex-end'}}
               marginRight={sizes.sm}
             >
-              {linkLabel || t('common.edit')}
+              {t('common.edit')}
             </Text >
           </TouchableOpacity>
             </View>
@@ -81,4 +88,4 @@ const Article = ({
     );
   }
 
-export default Article;
+export default OrderItem;

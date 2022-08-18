@@ -1,22 +1,73 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 import {useData, useTheme, useTranslation} from '../hooks';
-import {Block, Button, Image, Input, Product, Text} from '../components';
+import {Block, Button, Image, Input, Product, Text, Order, OrderItem, Article} from '../components';
 import { TouchableOpacity, TextInput, View, ScrollView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { ICONS } from '../constants/theme';
 import { Searchbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { IBlock, IOrderItem } from '../constants/types';
 
-const Customizable = () => {
+const Customizable = ({ route } : {route: any}) => {
+  const {basket, oldCustomizableText, oldQuantity, update, foodTitle, delivered, selectedRestaurant, selectedBranch, menuitem_id, price, tableNumber} = route.params;
+  const {assets, colors, fonts, gradients, sizes, icons} = useTheme();
+  var quantity = 1;
+  var initialText = '';
+  var textInput =       
+  <TextInput style={{backgroundColor:colors.card,
+    borderColor: colors.gray, 
+    borderWidth:1, 
+    borderRadius: 8, 
+    paddingVertical:10, 
+    paddingHorizontal: 8,
+    fontSize: 16}} 
+    onChangeText={newText => setText(newText)}
+    placeholder="Customize your dish" multiline 
+  />
+  if (update) {
+    quantity = oldQuantity
+    initialText = oldCustomizableText
+      textInput =  <TextInput style={{backgroundColor:colors.card,
+      borderColor: colors.gray, 
+      borderWidth:1, 
+      borderRadius: 8, 
+      paddingVertical:10, 
+      paddingHorizontal: 8,
+      fontSize: 16}} 
+      onChangeText={newText => setText(newText)}
+      defaultValue={oldCustomizableText}
+      editable={true}
+    />  
+  }
+  const [text, setText] = useState(initialText);
+  const {orderItem} = useData()
   const navigation = useNavigation();
   const {t} = useTranslation();
   const [tab, setTab] = useState<number>(0);
   const {mainRestaurants} = useData();
   const [products, setProducts] = useState(mainRestaurants);
-  const {assets, colors, fonts, gradients, sizes, icons} = useTheme();
-  const [count, setCount] = useState(1);
 
-  const [searchQuery, setSearchQuery] = React.useState('');
+  
+  const [count, setCount] = useState(quantity)
+  const [currOrderItem, setCurrOrderItem] = useState(basket)
+  const [load, setLoad] = useState(false);
+  const [searchQuery, setSearchQuery] = React.useState('');let newState: React.SetStateAction<IOrderItem[]> = [];
+
+
+  useEffect(()=>{
+    console.log('currOrderItem', currOrderItem)
+    if (load) {
+      navigation.navigate('Screens', {
+        screen: 'MenuPage',
+        params: {basket: currOrderItem}
+      });
+  }
+  }, [load])
+
+  var placeOrderText = "Add to Order"
+  if (update) {
+    placeOrderText = "Update Order"
+  }
 
   const onChangeSearch = (query: React.SetStateAction<string>) => setSearchQuery(query);
 
@@ -30,6 +81,46 @@ const Customizable = () => {
     }
     
   }
+
+  const onPressOrder = () => {
+    if (update) {
+      if (count == 0) {
+        console.log('selectedMenuItem',menuitem_id)
+        let newCurrOrderItem = currOrderItem.filter((item: { menuitem_id: number; })=> item.menuitem_id != menuitem_id)
+        console.log('newCurrOrderItem', newCurrOrderItem)
+        setCurrOrderItem(newCurrOrderItem)
+        console.log('test success')
+      }
+      else {
+        var newCurrOrderItem = [...currOrderItem]
+        for (let i = 0; i < currOrderItem.length; i++) {
+            if (newCurrOrderItem[i].menuitem_id === menuitem_id) {
+              newCurrOrderItem[i].quantity = count;
+              newCurrOrderItem[i].customizabletext = text;
+              setCurrOrderItem(newCurrOrderItem)
+            }
+        }
+        console.log("ERROR, Customizable.tsx")
+      }
+    } else {
+      if (count != 0) { 
+        let newOrderItem : IOrderItem = {
+        foodTitle: foodTitle,
+        branch_id: selectedRestaurant,
+        menuitem_id: menuitem_id,
+        quantity: count,
+        delivered: false,
+        customizabletext: text,
+        price: price
+        }
+        setCurrOrderItem((currOrderItem: any)=>[...currOrderItem, newOrderItem]);
+      }
+    }
+    setLoad(true);
+  }
+  
+
+  
   
   return (
     <TouchableOpacity
@@ -37,6 +128,8 @@ const Customizable = () => {
       style={{flex:1, paddingTop:sizes.s, }}
       onPress={()=>Keyboard.dismiss()}
     >
+      <Text>Selected Branch: {selectedBranch} Selected Restaurant: {selectedRestaurant} 
+            Selected Menu Item: {menuitem_id} Table Number: {tableNumber} update:{update}</Text>
       <View style={{flex: 1, paddingHorizontal:sizes.padding}}>
         <View style={{paddingVertical:10}}>
           <Text h5 style={{ paddingVertical:10, 
@@ -45,14 +138,7 @@ const Customizable = () => {
           </Text>
         </View>
         <View >
-          <TextInput style={{backgroundColor:colors.card,
-                            borderColor: colors.gray, 
-                            borderWidth:1, 
-                            borderRadius: 8, 
-                            paddingVertical:10, 
-                            paddingHorizontal: 8,
-                            fontSize: 16}} 
-                      placeholder="Customize your dish" multiline />
+          {textInput}
         </View>
       </View>
       <View style={{backgroundColor:'white', borderRadius:20, flex: 0.3, justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -79,19 +165,19 @@ const Customizable = () => {
               marginVertical={sizes.m} 
               rounded={true} 
               height={30} width={300}
-              onPress = {() => 
-                navigation.navigate('Screens', {
-                  screen: 'MenuPage'
-              })}
-              >
+              onPress = {onPressOrder}
+          >
+                
                   <Text white bold transform="uppercase">
-                    Place Order
+                    {placeOrderText}
                   </Text>
           </Button>
         </View>
       </View>
     </TouchableOpacity>
   );
+          
 };
+
 
 export default Customizable;

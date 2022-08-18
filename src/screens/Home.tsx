@@ -72,14 +72,14 @@ const Home = () => {
               if (searchQuery === "") {
                 return true;
               }
-              else if (product.title.toUpperCase().includes(searchQuery.toUpperCase().trim().replace(/\s/g, ""))) {
+              else if (product.restaurantname.toUpperCase().includes(searchQuery.toUpperCase().trim().replace(/\s/g, ""))) {
                 return true; 
               } else {
                 return false;
               }
             }).map((product) => (
               /* Uses the Product component from components/Product.tsx */
-              <Product {...product} key={`card-${product?.id}`} />
+              <Product {...product} key={`card-${product?.restaurant_id}`} />
             ))
           }
 

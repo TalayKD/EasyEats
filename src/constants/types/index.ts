@@ -1,6 +1,7 @@
 import i18n from 'i18n-js';
 import {ImageSourcePropType} from 'react-native';
 import {ITheme} from './theme';
+import Moment from 'moment';
 
 export * from './components';
 export * from './theme';
@@ -40,30 +41,32 @@ export interface IBlock {
 }
 
 export interface IBranch {
-  id?:number;
-  title?: string;
-  description?: string;
-  linkLabel?: string;
+  branch_id?: string;
+  branchname?: string;
+  restaurant_id: string;
+  location?: string;
   numTable?: number;
   type: 'vertical' | 'horizontal';
 }
 
 export interface IRestaurant {
-  id?: number;
-  title: string;
-  description?: string;
-  image?: string;
+  restaurant_id: string;
+  restaurantname: string;
+  cuisinetype?: string;
+  imageurl: string;
   type: 'vertical' | 'horizontal';
 }
 export interface IMenu {
-  id?: number;
-  title?: string;
+  menuitem_id: string;
+  menucategory?: ICategory;
+  restaurant_id: string;
+  menuitemname?: string;
+  customizable?: string;
+  imageurl?: string;
   description?: string;
-  image?: string;
-  timestamp?: number;
-  linkLabel?: string;
+  available?: boolean;
   type: 'vertical' | 'horizontal';
-  category?: ICategory;
+  
   price?: number;
 }
 export interface ILocation {
@@ -71,6 +74,26 @@ export interface ILocation {
   city?: string;
   country?: string;
 }
+
+// PANN: TODO, update this to match w DBeaver
+export interface IOrder {
+  branch_id: string;
+  tablenumber: number;
+  ordertime: string;
+  ordercomplete: boolean;
+}
+
+// PANN: TODO, update this to match w DBeaver
+export interface IOrderItem {
+  branch_id: string;
+  menuitem_id: string;
+  foodTitle: string;
+  quantity: number;
+  delivered: boolean;
+  customizabletext: string;
+  price: number;
+}
+
 export interface IUseData {
   isDark: boolean;
   handleIsDark: (isDark?: boolean) => void;
@@ -85,6 +108,8 @@ export interface IUseData {
   branches: IBranch[];
   setBranches: (data?: IBranch[]) => void;
   mainRestaurants: IRestaurant[];
+  order: IOrder[];
+  orderItem: IOrderItem[];
   setMainRestaurants: (data?: IRestaurant[]) => void;
   categories: ICategory[];
   setCategories: (data?: ICategory[]) => void;

@@ -9,7 +9,7 @@ import {useTheme, useTranslation} from '../hooks';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
-const BranchComponent = ({title, description, linkLabel, type}: IBranch) => {
+const BranchComponent = ({branchname: title, location: description, type}: IBranch) => {
   const {t} = useTranslation();
   const {assets, colors, sizes} = useTheme();
   const navigation = useNavigation();
@@ -56,7 +56,7 @@ const BranchComponent = ({title, description, linkLabel, type}: IBranch) => {
               size={sizes.linkSize}
               marginRight={sizes.s}
             >
-              {linkLabel || t('common.selectBranch')}
+              {t('common.selectBranch')}
             </Text >
             {/* This is the arrow */}
             <Image source={assets.arrow} color={colors.link} /> 

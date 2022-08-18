@@ -82,50 +82,7 @@ const Profile = () => {
               <Text p center white>
                 {user?.department}
               </Text>
-              <Block row marginVertical={sizes.m}>
-                <Button
-                  white
-                  outlined
-                  shadow={false}
-                  radius={sizes.m}
-                  onPress={() => {
-                    alert(`Follow ${user?.name}`);
-                  }}>
-                  <Block
-                    justify="center"
-                    radius={sizes.m}
-                    paddingHorizontal={sizes.m}
-                    color="rgba(255,255,255,0.2)">
-                    <Text white bold transform="uppercase">
-                      {t('common.follow')}
-                    </Text>
-                  </Block>
-                </Button>
-                <Button
-                  shadow={false}
-                  radius={sizes.m}
-                  marginHorizontal={sizes.sm}
-                  color="rgba(255,255,255,0.2)"
-                  outlined={String(colors.white)}
-                  onPress={() => handleSocialLink('twitter')}>
-                  <Ionicons
-                    size={18}
-                    name="logo-twitter"
-                    color={colors.white}
-                  />
-                </Button>
-                <Button
-                  shadow={false}
-                  radius={sizes.m}
-                  color="rgba(255,255,255,0.2)"
-                  outlined={String(colors.white)}
-                  onPress={() => handleSocialLink('dribbble')}>
-                  <Ionicons
-                    size={18}
-                    name="logo-dribbble"
-                    color={colors.white}
-                  />
-                </Button>
+              <Block row marginVertical={sizes.s}>
               </Block>
             </Block>
           </Image>

@@ -6,6 +6,8 @@ import {
   ICategory,
   IBranch,
   IRestaurant,
+  IOrder,
+  IOrderItem,
   IUser,
   IUseData,
   ITheme,
@@ -17,7 +19,7 @@ import {
   BRANCHES,
   MAIN_RESTAURANTS,
   CATEGORIES,
-  ARTICLES,
+  ORDER_ITEM,
   MENUS
 } from '../constants/mocks';
 import {light} from '../constants';
@@ -33,7 +35,7 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
   const [mainRestaurants, setMainRestaurants] = useState<IRestaurant[]>(MAIN_RESTAURANTS);
   const [menus, setMenus] = useState<IMenu[]>(MENUS);
   const [categories, setCategories] = useState<ICategory[]>(CATEGORIES);
-  const [articles, setArticles] = useState<IBlock[]>(ARTICLES);
+  const [orderItem, setOrderItem] = useState<IOrderItem[]>(ORDER_ITEM);
   const [article, setArticle] = useState<IBlock>({});
 
   // get isDark mode from storage
@@ -116,8 +118,8 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
     setMainRestaurants,
     categories,
     setCategories,
-    articles,
-    setArticles,
+    orderItem,
+    setOrderItem,
     menus,
     setMenus,
     article,

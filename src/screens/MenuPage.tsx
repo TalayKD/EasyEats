@@ -5,19 +5,52 @@ import {useData, useTheme} from '../hooks';
 import {ICategory, IMenu} from '../constants/types';
 import {Block, Button, Article, Text, Menu, Image} from '../components';
 import {useNavigation} from '@react-navigation/core';
+import { useLinkProps } from '@react-navigation/native';
 
-const MenuPage = () => {
+const MenuPage = ( { route } : {route: any}) => {
   const navigation = useNavigation();
   const data = useData();
   const [selected, setSelected] = useState<ICategory>();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [menus, setMenus] = useState<IMenu[]>([]);
   const {colors, gradients, sizes, icons} = useTheme();
+  const {selectedRestaurant, selectedBranch, tableNumber, basket} = route.params;
+  console.log('menupage', basket)
+  const restaurantData = data.menus.filter((menu)=>{
+    return menu.restaurant_id === selectedRestaurant
+  })
 
+  var amountInCart = 0
+  for (let i = 0; i < basket.length; i++) {
+    amountInCart += basket[i].quantity
+  }
+  console.log('amountInCart', amountInCart)
+  var cartNotification = <Text></Text>
+  if (amountInCart != 0) {
+    cartNotification = 
+      <TouchableOpacity
+        style={{
+          borderWidth: 2,
+          borderColor: 'rgba(0,0,0,10)',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 30,
+          position: 'absolute',
+          bottom: 80,
+          right: 50,
+          height: 30,
+          backgroundColor: '#FC585D',
+          borderRadius: 100,
+          zIndex: 2
+        }}
+      >
+        <Text bold p color='white'>{amountInCart}</Text>
+      </TouchableOpacity>
+  }
   // init articles
   useEffect(() => {
     // THIS sets what articles (specific text and image) it displays
-    setMenus(data?.menus);
+    setMenus(restaurantData);
     setCategories(data?.categories);
     setSelected(data?.categories[0]);
   }, [data.menus, data.categories]);
@@ -28,17 +61,17 @@ const MenuPage = () => {
       (category) => category?.id === selected?.id,
     );
 
-    const newMenus = data?.menus?.filter(
-      (menu) => menu?.category?.id === category?.id,
+    const newMenus = restaurantData.filter(
+      (menu) => menu?.menucategory?.id === category?.id,
     );
 
     setMenus(newMenus);
   }, [data, selected, setMenus]);
-
   return (
+    
     <Block>
-      {/* Floating Cart Button */}
-      
+      {/* Pann TODO : Remove Test */}
+      <Text>Branch: {selectedBranch} Restaurant: {selectedRestaurant} TableNumber: {tableNumber} </Text>
 
       {/* Floating Cart Button */}
       <TouchableOpacity
@@ -64,35 +97,14 @@ const MenuPage = () => {
           onPress={() =>
             navigation.navigate('Screens', {
               screen: 'Cart',
+              params: {currOrderItem: basket}
             })
           }
       >
           <Image style={{width:60, height:60, right: 2}} source={icons.cart}/>
       </TouchableOpacity>
 
-      <TouchableOpacity
-          style={{
-            borderWidth: 2,
-            borderColor: 'rgba(0,0,0,10)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 30,
-            position: 'absolute',
-            bottom: 80,
-            right: 50,
-            height: 30,
-            backgroundColor: '#FC585D',
-            borderRadius: 100,
-            zIndex: 2
-          }}
-          onPress={() =>
-            navigation.navigate('Screens', {
-              screen: 'Cart',
-            })
-          }
-      >
-        <Text bold p color='white'>1</Text>
-      </TouchableOpacity>
+      {cartNotification}
 
       {/* categories list */}
       <Block color={colors.card} row flex={0} paddingVertical={sizes.padding}>
@@ -132,12 +144,14 @@ const MenuPage = () => {
         data={menus}
         numColumns={2}
         showsVerticalScrollIndicator={true}
-        keyExtractor={(item) => `${item?.id}`}
+        keyExtractor={(item) => `${item?.menuitem_id}`}
         style={{paddingHorizontal: sizes.padding}}
         contentContainerStyle={{paddingBottom: sizes.l}}
         renderItem={({item}) => 
           <Block row wrap="wrap" justify="space-between" marginTop={sizes.sm}>
-            <Menu {...item} />
+            <Menu selectedBranch={selectedBranch} selectedRestaurant={selectedRestaurant} imageurl={item.imageurl} 
+            price={item.price} menuitemname={item.menuitemname} type={item.type} description={item.description} 
+            menuitem_id={item.menuitem_id} tableNumber={tableNumber} basket={basket}/>
           </Block>
         }
       />

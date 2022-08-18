@@ -9,7 +9,7 @@ import {useTheme, useTranslation} from '../hooks/';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
-const Product = ({image, title, type, linkLabel, description, timestamp}: IRestaurant) => {
+const Product = ({imageurl, restaurantname, type, restaurant_id}: IRestaurant) => {
   const {t} = useTranslation();
   const {assets, colors, sizes} = useTheme();
   const navigation = useNavigation();
@@ -28,7 +28,7 @@ const Product = ({image, title, type, linkLabel, description, timestamp}: IResta
       {/* Image in ALL products (in Home) */}
       <Image
         resizeMode="cover"
-        source={{uri: image}}
+        source={{uri: imageurl}}
         style={{
           height: isHorizontal ? 114 : 110,
           width: !isHorizontal ? '100%' : sizes.width / 2.435,
@@ -44,14 +44,15 @@ const Product = ({image, title, type, linkLabel, description, timestamp}: IResta
 
         {/* Title text */}
         <Text p marginTop={sizes.s}>
-          {title}
+          {restaurantname}
         </Text>
 
         {/* Select restaurant (Text and arrow) */}
         <TouchableOpacity 
           onPress = {() => 
             navigation.navigate('Screens', {
-              screen: 'Branch'
+              screen: 'Branch',
+              params: {selectedRestaurant: restaurant_id},
             })
           }>
           <Block row flex={0} align="center">
@@ -63,7 +64,7 @@ const Product = ({image, title, type, linkLabel, description, timestamp}: IResta
               size={sizes.linkSize}
               marginRight={sizes.s}
             >
-              {linkLabel || t('common.selectRestaurant')}
+              {t('common.selectRestaurant')}
             </Text >
             {/* This is the arrow */}
             <Image source={assets.arrow} color={colors.link} /> 
