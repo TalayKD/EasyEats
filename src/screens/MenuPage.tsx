@@ -71,7 +71,7 @@ const MenuPage = ( { route } : {route: any}) => {
     
     <Block>
       {/* Pann TODO : Remove Test */}
-      <Text>Branch: {selectedBranch} Restaurant: {selectedRestaurant} TableNumber: {tableNumber} </Text>
+      {/* <Text>Branch: {selectedBranch} Restaurant: {selectedRestaurant} TableNumber: {tableNumber} </Text> */}
 
       {/* Floating Cart Button */}
       <TouchableOpacity
@@ -103,8 +103,6 @@ const MenuPage = ( { route } : {route: any}) => {
       >
           <Image style={{width:60, height:60, right: 2}} source={icons.cart}/>
       </TouchableOpacity>
-
-      {cartNotification}
 
       {/* categories list */}
       <Block color={colors.card} row flex={0} paddingVertical={sizes.padding}>
@@ -155,6 +153,7 @@ const MenuPage = ( { route } : {route: any}) => {
           </Block>
         }
       />
+      {cartNotification}
     </Block>
 
     

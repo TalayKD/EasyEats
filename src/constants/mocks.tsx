@@ -227,70 +227,92 @@ export const MENUS: IMenu[] = [
   {
     menuitem_id: '1',
     type: 'vertical',
-    menuitemname: 'Appetizer 1',
+    menuitemname: 'Gyoza',
     menucategory: CATEGORIES[0],
     imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
-    price: 500,
+      'https://www.hachiban.co.th/_files/product/full/1LF4YSYG.png',
+    price: 154,
     restaurant_id: '1'
   },
   {
     menuitem_id: '2',
     type: 'vertical',
-    menuitemname: 'Appetizer 2',
+    menuitemname: 'Chicken Kar-age',
     menucategory: CATEGORIES[0],
     imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
+      'https://www.hachiban.co.th/_files/product/full/JXB6CGZH.png',
       //https://upload.wikimedia.org/wikipedia/id/3/3d/Yoshinoya_logo.jpg',
-    price: 250,
+    price: 90,
     restaurant_id: '1'
   },
   {
     menuitem_id: '3',
     type: 'vertical',
-    menuitemname: 'Appetizer 3',
+    menuitemname: 'Ebi Roll',
     menucategory: CATEGORIES[0],
     imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
+      'https://www.hachiban.co.th/_files/product/full/MVVEQCSN.png',
       // https://www.centralparkjakarta.com/wp-content/uploads/2017/10/pepper-lunc.jpg',
-    price: 20,
+    price: 78,
     restaurant_id: '1'
   },
   {
     menuitem_id: '4',
     type: 'vertical',
-    menuitemname: 'Appetizer 4',
+    menuitemname: 'Takoyaki',
     menucategory: CATEGORIES[0],
     imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
+      'https://www.hachiban.co.th/_files/product/full/9Q99I662.png',
       // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
-    price: 300,
-    restaurant_id: '1'
-  },
-  {
-    menuitem_id: '5',
-    type: 'vertical',
-    menuitemname: 'Appetizer 5',
-    menucategory: CATEGORIES[0],
-    imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
-      // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
-    price: 320,
+    price: 90,
     restaurant_id: '1'
   },
   {
     menuitem_id: '6',
     type: 'vertical',
-    menuitemname: 'Main 1',
+    menuitemname: 'Zaru Ramen',
     menucategory: CATEGORIES[1],
     imageurl:
-      'https://d1sag4ddilekf6.azureedge.net/compressed/merchants/3-C2TGFFWWTKVAC6/hero/e6274f90fec14f85826f4aed91f41f47_1645981740553211506.png',
+      'https://www.hachiban.co.th/_files/product/full/RSII7T7L.png',
       // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
-    price: 370,
+    price: 98,
     restaurant_id: '1'
   },
   {
     menuitem_id: '7',
+    type: 'vertical',
+    menuitemname: 'Shio Butter Ramen',
+    menucategory: CATEGORIES[1],
+    imageurl:
+      'https://www.hachiban.co.th/_files/product/full/FH0GVI5T.png',
+      // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
+    price: 98,
+    restaurant_id: '1'
+  },
+  {
+    menuitem_id: '8',
+    type: 'vertical',
+    menuitemname: 'Tongkosu Shoyu Ramen',
+    menucategory: CATEGORIES[1],
+    imageurl:
+      'https://www.hachiban.co.th/_files/product/full/5WIN3CZY.png',
+      // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
+    price: 98,
+    restaurant_id: '1'
+  },
+  {
+    menuitem_id: '9',
+    type: 'vertical',
+    menuitemname: 'Tomyum Chasyumen',
+    menucategory: CATEGORIES[1],
+    imageurl:
+      'https://www.hachiban.co.th/_files/product/full/5X0FZ408.png',
+      // https://article.redprice.co/wp-content/uploads/2017/10/blog.jpg',
+    price: 98,
+    restaurant_id: '1'
+  },
+  {
+    menuitem_id: '99',
     type: 'vertical',
     menuitemname: 'Main 2',
     menucategory: CATEGORIES[1],
@@ -301,7 +323,7 @@ export const MENUS: IMenu[] = [
     restaurant_id: '2'
   },
   {
-    menuitem_id: '8',
+    menuitem_id: '100',
     type: 'vertical',
     menuitemname: 'Dessert 1',
     menucategory: CATEGORIES[2],
@@ -312,7 +334,7 @@ export const MENUS: IMenu[] = [
     restaurant_id: '3'
   },
   {
-    menuitem_id: '9',
+    menuitem_id: '101',
     type: 'vertical',
     menuitemname: 'Drink 1',
     menucategory: CATEGORIES[3],

@@ -31,7 +31,7 @@ const Branch = ({ route } : {route: any}) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flex: 1, paddingBottom: sizes.m}}>
           {/* Pann TODO : Remove Test */}
-          <Text> {selectedRestaurant}{basket}</Text>
+          {/* <Text> {selectedRestaurant}{basket}</Text> */}
           <Block>
             <Text h5 marginTop={sizes.m}>
               Choose a branch for this restaurant

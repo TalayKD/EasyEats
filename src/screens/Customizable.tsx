@@ -128,8 +128,8 @@ const Customizable = ({ route } : {route: any}) => {
       style={{flex:1, paddingTop:sizes.s, }}
       onPress={()=>Keyboard.dismiss()}
     >
-      <Text>Selected Branch: {selectedBranch} Selected Restaurant: {selectedRestaurant} 
-            Selected Menu Item: {menuitem_id} Table Number: {tableNumber} update:{update}</Text>
+      {/* <Text>Selected Branch: {selectedBranch} Selected Restaurant: {selectedRestaurant} 
+            Selected Menu Item: {menuitem_id} Table Number: {tableNumber} update:{update}</Text> */}
       <View style={{flex: 1, paddingHorizontal:sizes.padding}}>
         <View style={{paddingVertical:10}}>
           <Text h5 style={{ paddingVertical:10, 
